@@ -1,12 +1,16 @@
 class Scenario {
   String name, description, location;
-  int record;
+  int timeRecord, id;
+  DateTime startDate, endDate;
 
   Scenario({
+    this.id,
     this.name,
     this.description,
     this.location,
-    this.record
+    this.timeRecord,
+    this.startDate,
+    this.endDate
 });
 
 

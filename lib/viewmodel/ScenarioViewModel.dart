@@ -27,4 +27,13 @@ class ScenarioViewModel extends BaseModel {
     loadScenario();
   }
 
+  Future<bool> deleteScenario(int id) async {
+    setState(ViewState.Busy);
+    await Future.delayed(Duration(seconds: 2));
+    scenarios.removeAt(id);
+    setState(ViewState.Retrieved);
+    notifyListeners();
+    return true;
+  }
+
 }
