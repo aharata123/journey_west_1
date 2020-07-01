@@ -9,7 +9,7 @@ class HomeAdmin extends StatefulWidget {
 }
 
 class _HomeAdminState extends State<HomeAdmin> {
-  int _currentIndex;
+  int _currentIndex = 0;
   final tabs = [
     Center(child: Text('Home')),
     Center(child: ScenarioPage()),

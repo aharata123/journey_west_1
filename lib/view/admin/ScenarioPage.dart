@@ -30,11 +30,12 @@ class ScenarioPage extends StatelessWidget {
                           caption: 'Edit',
                           color: Colors.blue,
                           icon: Icons.edit,
-                          onTap: () {
-                            Navigator.push(
+                          onTap: () async {
+                            await Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => ScenarioEditPage(id: model.scenarios[index].id)),
                             );
+                            model.loadScenario();
                           },
                         ),
                         IconSlideAction(
@@ -104,11 +105,12 @@ class ScenarioPage extends StatelessWidget {
                   }
               ),
               floatingActionButton: FloatingActionButton.extended(
-                onPressed: () {
-                  Navigator.push(
+                onPressed: () async {
+                 await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ScenarioForm()),
                   );
+                  model.loadScenario();
                 },
                 label: Text('Add Scenario'),
                 icon: Icon(Icons.add),

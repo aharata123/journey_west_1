@@ -105,7 +105,7 @@ class ScenarioForm extends StatelessWidget {
                               print(model.startDate);
                               print(model.endDate);
                               print(model.timeRecord);
-
+                              Navigator.pop(context);
                             }
                           },
                         ),
