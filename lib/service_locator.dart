@@ -6,6 +6,7 @@ import 'package:journeywest/viewmodel/ScenarioDetailViewModel.dart';
 import 'package:journeywest/viewmodel/ScenarioEditViewModel.dart';
 import 'package:journeywest/viewmodel/ScenarioFormViewModel.dart';
 import 'package:journeywest/viewmodel/ScenarioViewModel.dart';
+import 'package:journeywest/viewmodel/ShoppingCartViewModel.dart';
 
 GetIt locator = GetIt();
 
@@ -19,4 +20,5 @@ void setupLocator() {
   locator.registerFactory<ScenarioEditViewModel>(() => ScenarioEditViewModel());
   locator.registerFactory<ScenarioDetailViewModel>(() => ScenarioDetailViewModel());
   locator.registerFactory<LoginViewModel>(() => LoginViewModel());
+  locator.registerFactory<ShoppingCartViewModel>(() => ShoppingCartViewModel());
 }

@@ -8,6 +8,7 @@ import 'package:journeywest/view/admin/BaseView.dart';
 import 'package:journeywest/view/admin/ScenarioDetailPage.dart';
 import 'package:journeywest/view/admin/ScenarioEditPage.dart';
 import 'package:journeywest/view/admin/ScenarioForm.dart';
+import 'package:journeywest/view/admin/ShoppingCartPage.dart';
 import 'package:journeywest/viewmodel/ScenarioViewModel.dart';
 
 class ScenarioPage extends StatelessWidget {
@@ -33,11 +34,14 @@ class ScenarioPage extends StatelessWidget {
                             prefixIcon: Icon(Icons.search),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(20)))),
+                        onChanged: (value) {
+                          model.filterSearchResults(value);
+                        },
                       ),
                     ),
                     Expanded(
                       child: ListView.builder(
-                          itemCount: model.scenarios.length,
+                          itemCount: model.listForSearch.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Slidable(
                               actionPane: SlidableBehindActionPane(),
@@ -49,7 +53,7 @@ class ScenarioPage extends StatelessWidget {
                                   onTap: () async {
                                    final updated = await Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => ScenarioEditPage(id: model.scenarios[index].id)),
+                                      MaterialPageRoute(builder: (context) => ScenarioEditPage(id: model.listForSearch[index].id)),
                                     );
                                   if(updated == Status.isUpdated) {
                                     model.loadScenario();
@@ -64,7 +68,7 @@ class ScenarioPage extends StatelessWidget {
                                     showDialog(
                                         context: context,
                                         builder: (BuildContext context) =>CupertinoAlertDialog(
-                                          title: Text('Delete ' + model.scenarios[index].name + " ?"),
+                                          title: Text('Delete ' + model.listForSearch[index].name + " ?"),
                                           content: Text('The item will be deleted permanently'),
                                           actions: <Widget>[
                                             CupertinoDialogAction(
@@ -74,8 +78,8 @@ class ScenarioPage extends StatelessWidget {
                                             CupertinoDialogAction(
                                               child: Text('Yes'),
                                               onPressed: () {
-                                                print(model.scenarios[index].id);
-                                                model.deleteScenario(model.scenarios[index].id-1);
+                                                print(model.listForSearch[index].id);
+                                                model.deleteScenario(model.listForSearch[index].id-1);
                                                 Navigator.pop(context, true);
                                               },
                                             )
@@ -93,8 +97,8 @@ class ScenarioPage extends StatelessWidget {
                                           children: <Widget>[
                                             new ListTile(
                                               leading: Icon(Icons.image, size: 50),
-                                              title: Text(model.scenarios[index].name),
-                                              subtitle: Text(model.scenarios[index].description),
+                                              title: Text(model.listForSearch[index].name),
+                                              subtitle: Text(model.listForSearch[index].description),
                                             ),
                                           ],
                                         )
@@ -107,12 +111,20 @@ class ScenarioPage extends StatelessWidget {
                                   );
                                   popup.show(
                                     title: 'Scenario Info',
-                                    content: ScenarioDetailPage(id: model.scenarios[index].id),
+                                    content: ScenarioDetailPage(id: model.listForSearch[index].id),
                                     actions: [
                                       popup.button(
                                         label: 'Close',
                                         onPressed: Navigator.of(context).pop,
                                       ),
+                                      popup.button(
+                                        label: 'Shopping Cart',
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(
+                                              builder: (context) => ShoppingCartPage(id: model.listForSearch[index].id, name: model.listForSearch[index].name)
+                                          ));
+                                        }
+                                      )
                                     ],
                                     // bool barrierDismissible = false,
                                     // Widget close,
