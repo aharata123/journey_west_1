@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/enums/ViewState.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
 import 'package:journeywest/view/admin/ScenarioDetailPage.dart';
@@ -31,11 +32,13 @@ class ScenarioPage extends StatelessWidget {
                           color: Colors.blue,
                           icon: Icons.edit,
                           onTap: () async {
-                            await Navigator.push(
+                           final updated = await Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => ScenarioEditPage(id: model.scenarios[index].id)),
                             );
+                          if(updated == Status.isUpdated) {
                             model.loadScenario();
+                          }
                           },
                         ),
                         IconSlideAction(
@@ -106,11 +109,13 @@ class ScenarioPage extends StatelessWidget {
               ),
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: () async {
-                 await Navigator.push(
+                final created = await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ScenarioForm()),
                   );
-                  model.loadScenario();
+                  if(created == Status.isCreated) {
+                    model.loadScenario();
+                  }
                 },
                 label: Text('Add Scenario'),
                 icon: Icon(Icons.add),

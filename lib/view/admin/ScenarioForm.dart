@@ -1,6 +1,7 @@
 
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
+import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
 import 'package:journeywest/viewmodel/ScenarioFormViewModel.dart';
 
@@ -105,7 +106,7 @@ class ScenarioForm extends StatelessWidget {
                               print(model.startDate);
                               print(model.endDate);
                               print(model.timeRecord);
-                              Navigator.pop(context);
+                              Navigator.pop(context, Status.isCreated);
                             }
                           },
                         ),
