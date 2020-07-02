@@ -1,6 +1,5 @@
 import 'package:get_it/get_it.dart';
 import 'package:journeywest/service/ScenarioService.dart';
-import 'package:journeywest/view/admin/ScenarioEditPage.dart';
 import 'package:journeywest/viewmodel/LoginViewModel.dart';
 import 'package:journeywest/viewmodel/ScenarioDetailViewModel.dart';
 import 'package:journeywest/viewmodel/ScenarioEditViewModel.dart';
