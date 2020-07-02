@@ -33,7 +33,7 @@ class ScenarioForm extends StatelessWidget {
                     children: <Widget>[
                       CardSettingsText(
                         label: 'Name',
-                        hintText: 'Tên kiếp nạn',
+                        hintText: 'Name of scene',
                         initialValue: model.name,
                         validator: (value) {
                           if (value == null || value.isEmpty) return 'Name is required.';
@@ -44,7 +44,7 @@ class ScenarioForm extends StatelessWidget {
                       ),
                       CardSettingsText(
                         label: 'Location',
-                        hintText: 'Địa điểm quay',
+                        hintText: 'Take place in ?',
                         initialValue: model.location,
                         validator: (value) {
                           if (value == null || value.isEmpty) return 'Location is required.';
@@ -55,7 +55,7 @@ class ScenarioForm extends StatelessWidget {
                       ),
                       CardSettingsParagraph(
                         label: 'Description',
-                        hintText: 'Mô tả',
+                        hintText: 'Describe for scene',
                         initialValue: model.description,
                         validator: (value) {
                           if (value == null || value.isEmpty) return 'Description is required.';
