@@ -1,20 +1,19 @@
 import 'package:journeywest/model/Scenario.dart';
+import 'package:journeywest/service/ScenarioService.dart';
+import 'package:journeywest/service_locator.dart';
 
 import 'BaseModel.dart';
 
 class ScenarioEditViewModel extends BaseModel {
+  ScenarioService scenarioService = locator<ScenarioService>();
   Scenario scenario;
 
-  Future<Scenario> fetchData(int id) async {
+  Future<Scenario> fetchData(Scenario scenario) async {
+   this.scenario = scenario;
+  }
 
-    await Future.delayed(Duration(seconds: 2));
-    if(id == 1) {
-     return this.scenario = new Scenario(name: 'Scene 1', description: 'Wukong', location: 'Campuchia',
-          timeRecord: 1, startDate: DateTime.now(), endDate: DateTime.now());
-    } else if (id == 2) {
-     return this.scenario = new Scenario(name: 'Scene 2', description: 'Sugar Increase', location: 'China',
-          timeRecord: 1, startDate: DateTime.now(), endDate: DateTime.now());
-    }
+  Future<bool> update() async {
+    return scenarioService.updateScenario(scenario);
   }
 
 }

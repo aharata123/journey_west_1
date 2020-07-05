@@ -34,79 +34,80 @@ class ScenarioForm extends StatelessWidget {
                       CardSettingsText(
                         label: 'Name',
                         hintText: 'Name of scene',
-                        initialValue: model.name,
+                        initialValue: model.scenario.name,
                         validator: (value) {
                           if (value == null || value.isEmpty) return 'Name is required.';
                         },
                         onChanged: (value) {
-                          model.name = value;
+                          model.scenario.name = value;
                         },
                       ),
                       CardSettingsText(
                         label: 'Location',
                         hintText: 'Take place in ?',
-                        initialValue: model.location,
+                        initialValue: model.scenario.location,
                         validator: (value) {
                           if (value == null || value.isEmpty) return 'Location is required.';
                         },
                         onChanged: (value) {
-                          model.location = value;
+                          model.scenario.location = value;
                         },
                       ),
                       CardSettingsParagraph(
                         label: 'Description',
                         hintText: 'Describe for scene',
-                        initialValue: model.description,
+                        initialValue: model.scenario.description,
                         validator: (value) {
                           if (value == null || value.isEmpty) return 'Description is required.';
                         },
                         onChanged: (value) {
-                          model.description = value;
+                          model.scenario.description = value;
                         },
                       ),
                       CardSettingsDateTimePicker(
                         firstDate: DateTime(2019),
-                        initialValue: model.startDate,
+                        initialValue: model.scenario.startDate,
                         label: 'Start',
                         validator: (value) {
                           startDate = value;
                           return null;
                         },
                         onChanged: (value) {
-                          model.startDate = value;
+                          model.scenario.startDate = value;
                         },
                       ),
                       CardSettingsDateTimePicker(
                         label: 'End',
-                        initialValue: model.endDate,
+                        initialValue: model.scenario.endDate,
                         firstDate: DateTime(2019),
                         validator: (value) {
                           endDate = value;
                           if(startDate.isAfter(endDate)) return 'Invalid date';
                         },
                         onChanged: (value) {
-                          model.endDate = value;
+                          model.scenario.endDate = value;
                         },
                       ),
                       CardSettingsInt(
                         label: 'Time Record',
-                        initialValue: model.timeRecord,
+                        initialValue: model.scenario.timeRecord,
                         onChanged: (value) {
-                          model.timeRecord = value;
+                          model.scenario.timeRecord = value;
+                        },
+                        validator: (value) {
+                          if(value == null || value < 0) return "Invalid value";
                         },
                       ),
                       CardFieldLayout(<Widget>[
                         CardSettingsButton(
                           label: 'CREATE',
                           backgroundColor: Colors.green,
-                          onPressed: () {
+                          onPressed: () async {
                             if(_formKey.currentState.validate()) {
-                              print(model.name);
-                              print(model.description);
-                              print(model.startDate);
-                              print(model.endDate);
-                              print(model.timeRecord);
-                              Navigator.pop(context, Status.isCreated);
+                              bool isCreated = await model.create();
+                              if(isCreated) {
+                                Navigator.pop(context, Status.isCreated);
+                              }
                             }
                           },
                         ),

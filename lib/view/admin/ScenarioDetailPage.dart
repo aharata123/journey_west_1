@@ -2,12 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:journeywest/model/Scenario.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
 import 'package:journeywest/viewmodel/ScenarioDetailViewModel.dart';
 
 class ScenarioDetailPage extends StatelessWidget {
-  final int id;
-  ScenarioDetailPage({Key key, @required this.id}) : super(key : key);
+  final Scenario scenario;
+  ScenarioDetailPage({Key key, @required this.scenario}) : super(key : key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class ScenarioDetailPage extends StatelessWidget {
       builder: (context, child, model) {
         return Scaffold(
           body: FutureBuilder(
-            future: model.fetchData(id),
+            future: model.fetchData(scenario),
             builder: (context, snapshot) {
               if(snapshot.connectionState == ConnectionState.done) {
                 return SingleChildScrollView(

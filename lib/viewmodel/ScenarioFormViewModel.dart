@@ -1,26 +1,33 @@
 
 
+import 'package:journeywest/enums/ViewState.dart';
+import 'package:journeywest/model/Scenario.dart';
+import 'package:journeywest/service/ScenarioService.dart';
+
+import '../service_locator.dart';
 import 'BaseModel.dart';
 
 class ScenarioFormViewModel extends BaseModel {
-  String name, description, location;
-  int timeRecord;
-  DateTime startDate, endDate;
+  ScenarioService scenarioService = locator<ScenarioService>();
+  Scenario scenario;
 
   ScenarioFormViewModel() {
-    this.timeRecord = 0;
-    this.startDate = DateTime.now();
-    this.endDate = DateTime.now();
+    scenario = Scenario();
+    reset();
   }
 
   void reset() {
-    this.name = '';
-    this.description = '';
-    this.location = '';
-    this.timeRecord = 0;
-    this.startDate = DateTime.now();
-    this.endDate = DateTime.now();
+    this.scenario.name = '';
+    this.scenario.description = '';
+    this.scenario.location = '';
+    this.scenario.timeRecord = 0;
+    this.scenario.startDate = DateTime.now();
+    this.scenario.endDate = DateTime.now();
     notifyListeners();
+  }
+
+  Future<bool> create() {
+   return scenarioService.createScenario(scenario);
   }
 
 }

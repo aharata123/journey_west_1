@@ -23,10 +23,9 @@ class ScenarioViewModel extends BaseModel {
 
   Future<bool> deleteScenario(int id) async {
     setState(ViewState.Busy);
-    await Future.delayed(Duration(seconds: 2));
-    scenarios.removeAt(id);
+    bool isDelete = await scenarioService.deleteScenario(id);
     setState(ViewState.Retrieved);
-    return true;
+    return isDelete;
   }
 
   void filterSearchResults(String search) {

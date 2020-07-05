@@ -4,16 +4,17 @@
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:journeywest/enums/Status.dart';
+import 'package:journeywest/model/Scenario.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
 import 'package:journeywest/viewmodel/ScenarioEditViewModel.dart';
 import 'package:journeywest/viewmodel/ScenarioFormViewModel.dart';
 
 class ScenarioEditPage extends StatelessWidget {
-  final int id;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   DateTime startDate, endDate;
+  final Scenario scenario;
 
-  ScenarioEditPage({Key key, @required this.id}) : super(key : key);
+  ScenarioEditPage({Key key, @required this.scenario}) : super(key : key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class ScenarioEditPage extends StatelessWidget {
             body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: FutureBuilder(
-                future: model.fetchData(id),
+                future: model.fetchData(scenario),
                 builder: (context, snapshot){
                   if(snapshot.connectionState == ConnectionState.done) {
                     return Form(
@@ -100,6 +101,9 @@ class ScenarioEditPage extends StatelessWidget {
                               CardSettingsInt(
                                 label: 'Time Record',
                                 initialValue: model.scenario.timeRecord,
+                                validator: (value) {
+                                  if(value == null || value < 0) return "Invalid value";
+                                },
                                 onChanged: (value) {
                                   model.scenario.timeRecord = value;
                                 },
@@ -108,14 +112,12 @@ class ScenarioEditPage extends StatelessWidget {
                                 CardSettingsButton(
                                   label: 'SAVE',
                                   backgroundColor: Colors.green,
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if(_formKey.currentState.validate()) {
-                                      print(model.scenario.name);
-                                      print(model.scenario.description);
-                                      print(model.scenario.startDate);
-                                      print(model.scenario.endDate);
-                                      print(model.scenario.timeRecord);
-                                      Navigator.pop(context, Status.isUpdated);
+                                      bool isUpdated = await model.update();
+                                      if(isUpdated) {
+                                        Navigator.pop(context, Status.isUpdated);
+                                      }
                                     }
                                   },
                                 ),

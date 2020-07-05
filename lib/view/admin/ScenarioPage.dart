@@ -53,7 +53,7 @@ class ScenarioPage extends StatelessWidget {
                                   onTap: () async {
                                    final updated = await Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => ScenarioEditPage(id: model.listForSearch[index].id)),
+                                      MaterialPageRoute(builder: (context) => ScenarioEditPage(scenario: model.listForSearch[index])),
                                     );
                                   if(updated == Status.isUpdated) {
                                     model.loadScenario();
@@ -77,10 +77,13 @@ class ScenarioPage extends StatelessWidget {
                                             ),
                                             CupertinoDialogAction(
                                               child: Text('Yes'),
-                                              onPressed: () {
+                                              onPressed: () async {
                                                 print(model.listForSearch[index].id);
-                                                model.deleteScenario(model.listForSearch[index].id-1);
-                                                Navigator.pop(context, true);
+                                                bool isDelete = await model.deleteScenario(model.listForSearch[index].id);
+                                                Navigator.pop(context);
+                                                if(isDelete) {
+                                                  model.loadScenario();
+                                                }
                                               },
                                             )
                                           ],
@@ -111,7 +114,7 @@ class ScenarioPage extends StatelessWidget {
                                   );
                                   popup.show(
                                     title: 'Scenario Info',
-                                    content: ScenarioDetailPage(id: model.listForSearch[index].id),
+                                    content: ScenarioDetailPage(scenario: model.listForSearch[index]),
                                     actions: [
                                       popup.button(
                                         label: 'Close',
