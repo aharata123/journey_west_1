@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:journeywest/model/Scenario.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
-import 'package:journeywest/viewmodel/ScenarioDetailViewModel.dart';
+import 'package:journeywest/viewmodel/admin/scenario/ScenarioDetailViewModel.dart';
+
 
 class ScenarioDetailPage extends StatelessWidget {
   final Scenario scenario;

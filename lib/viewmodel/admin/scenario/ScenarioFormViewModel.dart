@@ -1,11 +1,10 @@
 
 
-import 'package:journeywest/enums/ViewState.dart';
+
 import 'package:journeywest/model/Scenario.dart';
 import 'package:journeywest/service/ScenarioService.dart';
-
-import '../service_locator.dart';
-import 'BaseModel.dart';
+import 'package:journeywest/service_locator.dart';
+import 'package:journeywest/viewmodel/BaseModel.dart';
 
 class ScenarioFormViewModel extends BaseModel {
   ScenarioService scenarioService = locator<ScenarioService>();

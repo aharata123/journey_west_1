@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/model/Scenario.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
-import 'package:journeywest/viewmodel/ScenarioEditViewModel.dart';
-import 'package:journeywest/viewmodel/ScenarioFormViewModel.dart';
+import 'package:journeywest/viewmodel/admin/scenario/ScenarioEditViewModel.dart';
 
 class ScenarioEditPage extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

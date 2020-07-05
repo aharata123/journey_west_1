@@ -1,8 +1,9 @@
 import 'package:journeywest/model/Scenario.dart';
 import 'package:journeywest/service/ScenarioService.dart';
 import 'package:journeywest/service_locator.dart';
+import 'package:journeywest/viewmodel/BaseModel.dart';
 
-import 'BaseModel.dart';
+
 
 class ScenarioEditViewModel extends BaseModel {
   ScenarioService scenarioService = locator<ScenarioService>();

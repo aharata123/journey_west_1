@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:journeywest/view/admin/ScenarioPage.dart';
+import 'file:///E:/Term%207/PRM391/BT/journey_west/lib/view/admin/scenario/ScenarioPage.dart';
 
 class HomeAdmin extends StatefulWidget {
   @override

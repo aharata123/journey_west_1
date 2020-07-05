@@ -1,6 +1,6 @@
 import 'package:journeywest/model/Scenario.dart';
+import 'package:journeywest/viewmodel/BaseModel.dart';
 
-import 'BaseModel.dart';
 
 class ScenarioDetailViewModel extends BaseModel {
   Scenario scenario;

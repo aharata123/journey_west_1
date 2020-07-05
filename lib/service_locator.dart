@@ -1,11 +1,11 @@
 import 'package:get_it/get_it.dart';
 import 'package:journeywest/service/ScenarioService.dart';
 import 'package:journeywest/viewmodel/LoginViewModel.dart';
-import 'package:journeywest/viewmodel/ScenarioDetailViewModel.dart';
-import 'package:journeywest/viewmodel/ScenarioEditViewModel.dart';
-import 'package:journeywest/viewmodel/ScenarioFormViewModel.dart';
-import 'package:journeywest/viewmodel/ScenarioViewModel.dart';
 import 'package:journeywest/viewmodel/ShoppingCartViewModel.dart';
+import 'package:journeywest/viewmodel/admin/scenario/ScenarioDetailViewModel.dart';
+import 'package:journeywest/viewmodel/admin/scenario/ScenarioEditViewModel.dart';
+import 'package:journeywest/viewmodel/admin/scenario/ScenarioFormViewModel.dart';
+import 'package:journeywest/viewmodel/admin/scenario/ScenarioViewModel.dart';
 
 GetIt locator = GetIt();
 

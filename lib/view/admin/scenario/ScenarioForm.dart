@@ -3,7 +3,8 @@ import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
-import 'package:journeywest/viewmodel/ScenarioFormViewModel.dart';
+import 'package:journeywest/viewmodel/admin/scenario/ScenarioFormViewModel.dart';
+
 
 class ScenarioForm extends StatelessWidget {
 

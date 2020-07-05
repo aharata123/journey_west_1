@@ -5,11 +5,12 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/enums/ViewState.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
-import 'package:journeywest/view/admin/ScenarioDetailPage.dart';
-import 'package:journeywest/view/admin/ScenarioEditPage.dart';
-import 'package:journeywest/view/admin/ScenarioForm.dart';
+import 'package:journeywest/view/admin/scenario/ScenarioDetailPage.dart';
+import 'package:journeywest/viewmodel/admin/scenario/ScenarioViewModel.dart';
+import 'ScenarioEditPage.dart';
+import 'ScenarioForm.dart';
 import 'package:journeywest/view/admin/ShoppingCartPage.dart';
-import 'package:journeywest/viewmodel/ScenarioViewModel.dart';
+
 
 class ScenarioPage extends StatelessWidget {
   @override
