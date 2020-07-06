@@ -107,32 +107,23 @@ class ScenarioEditPage extends StatelessWidget {
                                   model.scenario.timeRecord = value;
                                 },
                               ),
-                              CardFieldLayout(<Widget>[
-                                CardSettingsButton(
-                                  label: 'SAVE',
-                                  backgroundColor: Colors.green,
-                                  onPressed: () async {
-                                    if(_formKey.currentState.validate()) {
-                                      bool isUpdated = await model.update();
-                                      if(isUpdated) {
-                                        Navigator.pop(context, Status.isUpdated);
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CardFieldLayout(<Widget>[
+                                  CardSettingsButton(
+                                    label: 'SAVE',
+                                    backgroundColor: Colors.green,
+                                    onPressed: () async {
+                                      if(_formKey.currentState.validate()) {
+                                        bool isUpdated = await model.update();
+                                        if(isUpdated) {
+                                          Navigator.pop(context, Status.isUpdated);
+                                        }
                                       }
-                                    }
-                                  },
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: CardSettingsButton(
-                                    label: 'RESET',
-                                    isDestructive: true,
-                                    onPressed: () {
-                                      _formKey.currentState.reset();
                                     },
-                                    backgroundColor: Colors.red,
-                                    textColor: Colors.white,
                                   ),
-                                )
-                              ])
+                                ]),
+                              )
                             ],
                           )
                         ],
