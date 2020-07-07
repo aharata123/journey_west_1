@@ -7,14 +7,14 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/enums/ViewState.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
-import 'package:journeywest/view/admin/actor/ActorEditPage.dart';
-import 'package:journeywest/view/admin/actor/ActorForm.dart';
-import 'package:journeywest/viewmodel/admin/actor/ActorViewModel.dart';
+import 'package:journeywest/view/admin/tool/ToolEditPage.dart';
+import 'package:journeywest/view/admin/tool/ToolForm.dart';
+import 'package:journeywest/viewmodel/admin/tool/ToolViewModel.dart';
 
-class ActorPage extends StatelessWidget {
+class ToolPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BaseView<ActorViewModel>(
+    return BaseView<ToolViewModel>(
       builder: (context, child, model) {
         switch(model.state) {
           case ViewState.Busy:
@@ -53,7 +53,7 @@ class ActorPage extends StatelessWidget {
                                   onTap: () async {
                                     final updated = await Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => ActorEditPage(actor: model.listForSearch[index])),
+                                      MaterialPageRoute(builder: (context) => ToolEditPage(tool: model.listForSearch[index])),
                                     );
                                     if(updated == Status.isUpdated) {
                                       model.load();
@@ -139,13 +139,13 @@ class ActorPage extends StatelessWidget {
                 onPressed: () async {
                   final created = await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ActorForm()),
+                    MaterialPageRoute(builder: (context) => ToolForm()),
                   );
                   if(created == Status.isCreated) {
                     model.load();
                   }
                 },
-                label: Text('Add Actor'),
+                label: Text('Add Tool'),
                 icon: Icon(Icons.add),
                 backgroundColor: Colors.blue,
               ),

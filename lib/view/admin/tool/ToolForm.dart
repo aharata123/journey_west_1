@@ -5,20 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_beautiful_popup/main.dart';
 import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
-import 'package:journeywest/viewmodel/admin/actor/ActorFormViewModel.dart';
+import 'package:journeywest/viewmodel/admin/tool/ToolFormViewModel.dart';
 
-class ActorForm extends StatelessWidget {
+
+class ToolForm extends StatelessWidget {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<ActorFormViewModel>(
+    return BaseView<ToolFormViewModel>(
         builder: (context, child, model) {
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              title: Text('Create Actor'),
+              title: Text('Create Tool'),
             ),
             body: Column(
               children: [
@@ -69,76 +70,39 @@ class ActorForm extends StatelessWidget {
                           CardSettingsSection(
                             header: CardSettingsHeader(
                               color: Colors.blue,
-                              label: 'Actor',
+                              label: 'Tool',
                             ),
                             children: <Widget>[
                               CardSettingsText(
-                                label: 'Username',
-                                hintText: 'Enter username',
-                                initialValue: model.actor.username,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) return 'Username is required.';
-                                },
-                                onChanged: (value) {
-                                  model.actor.username = value.trim();
-                                },
-                              ),
-                              CardSettingsPassword(
-                                label: 'Password',
-                                hintText: 'Enter your password',
-                                initialValue: model.actor.password,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) return 'Password is required.';
-                                },
-                                onChanged: (value) {
-                                  model.actor.password = value;
-                                },
-                              ),
-                              CardSettingsText(
                                 label: 'Name',
-                                hintText: 'Name of actor',
-                                initialValue: model.actor.name,
+                                hintText: 'Enter name of tool',
+                                initialValue: model.tool.name,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) return 'Name is required.';
                                 },
                                 onChanged: (value) {
-                                  model.actor.name = value;
-                                },
-                              ),
-                              CardSettingsText(
-                                label: 'Email',
-                                hintText: 'Email of actor',
-                                initialValue: model.actor.email,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) return 'Email is required.';
-                                },
-                                onChanged: (value) {
-                                  model.actor.email = value;
-                                },
-                              ),
-                              CardSettingsText(
-                                label: 'Phone Number',
-                                hintText: 'Phone number of actor',
-                                initialValue: model.actor.phone,
-                                validator: (value) {
-                                  Pattern pattern = r'[0-9]{10}';
-                                  RegExp regex = RegExp(pattern);
-                                  if(!regex.hasMatch(value)) return 'Invalid';
-                                },
-                                onChanged: (value) {
-                                  model.actor.phone = value;
+                                  model.tool.name = value.trim();
                                 },
                               ),
                               CardSettingsParagraph(
                                 label: 'Description',
-                                hintText: 'Describe for actor',
-                                initialValue: model.actor.description,
+                                hintText: 'Describe for tool',
+                                initialValue: model.tool.description,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) return 'Description is required.';
                                 },
                                 onChanged: (value) {
-                                  model.actor.description = value;
-
+                                  model.tool.description = value;
+                                },
+                              ),
+                              CardSettingsInt(
+                                label: 'Quantity',
+                                initialValue: model.tool.quantity,
+                                onChanged: (value) {
+                                  model.tool.quantity = value;
+                                },
+                                validator: (value) {
+                                  if(value == null || value < 0) return "Invalid value";
                                 },
                               ),
                               CardFieldLayout(<Widget>[
@@ -157,7 +121,7 @@ class ActorForm extends StatelessWidget {
                                         );
                                         popup.show(
                                             title: 'Action failed',
-                                            content: 'Something went wrong. Check your username',
+                                            content: 'Something went wrong.',
                                             actions: [
                                               popup.button(
                                                 label: 'Close',

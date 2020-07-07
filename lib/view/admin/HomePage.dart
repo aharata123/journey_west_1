@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'file:///E:/Term%207/PRM391/BT/journey_west/lib/view/admin/scenario/ScenarioPage.dart';
 import 'package:journeywest/view/admin/actor/ActorPage.dart';
+import 'package:journeywest/view/admin/tool/ToolPage.dart';
 
 class HomeAdmin extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _HomeAdminState extends State<HomeAdmin> {
     Center(child: Text('Home')),
     Center(child: ScenarioPage()),
     Center(child: ActorPage()),
-    Center(child: Text('Tool')),
+    Center(child: ToolPage()),
   ];
 
   @override
