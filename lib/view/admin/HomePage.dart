@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'file:///E:/Term%207/PRM391/BT/journey_west/lib/view/admin/scenario/ScenarioPage.dart';
 import 'package:journeywest/view/admin/actor/ActorPage.dart';
 import 'package:journeywest/view/admin/tool/ToolPage.dart';
+import 'package:journeywest/view/login.dart';
 
 class HomeAdmin extends StatefulWidget {
   @override
@@ -22,6 +23,38 @@ class _HomeAdminState extends State<HomeAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Log Out'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                    LoginPage()), (Route<dynamic> route) => false);
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Text('Test'),
       ),

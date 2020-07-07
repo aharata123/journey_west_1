@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:journeywest/service_locator.dart';
+
 import 'package:journeywest/view/login.dart';
 
 void main() {
@@ -12,8 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginPage(),
       debugShowCheckedModeBanner: false,
+      home: LoginPage(),
     );
   }
 }

@@ -155,7 +155,6 @@ class LoginPage extends StatelessWidget {
                 ));
            } else if(role == Role.EMPLOYEE) {
 
-
            } else {
              final popup = BeautifulPopup(
                context: context,
