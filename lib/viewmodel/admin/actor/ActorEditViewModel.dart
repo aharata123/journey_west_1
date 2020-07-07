@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_utils/file_utils.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:journeywest/enums/ViewState.dart';
 import 'package:journeywest/model/Actor.dart';
@@ -20,7 +21,16 @@ class ActorEditViewModel extends BaseModel {
   }
 
   Future<bool> update() async {
+    setState(ViewState.Busy);
     if(image != null) {
+      try {
+        StorageReference photoRef = await FirebaseStorage().getReferenceFromUrl(this.actor.image);
+        if(photoRef != null) {
+          photoRef.delete();
+        }
+      } catch (Exception) {
+        print(Exception);
+      }
       this.actor.image = await uploadToFireStore();
     }
     return actorService.updateActor(actor);
