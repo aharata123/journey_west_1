@@ -107,6 +107,26 @@ class ScenarioEditPage extends StatelessWidget {
                                   model.scenario.timeRecord = value;
                                 },
                               ),
+                              ListTile(
+                                  leading:
+                                  const Icon(Icons.attach_file, color: Colors.black),
+                                  title: new InputDecorator(
+                                    decoration: InputDecoration(
+                                      labelText: 'File name',
+                                    ),
+                                    child: InkWell(
+                                      onTap: ()  {
+                                        model.getFile();
+                                      },
+                                      child: new Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Expanded(child: new Text(model.fileName)),
+                                        ],
+                                      ),
+                                    ),
+                                  )),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: CardFieldLayout(<Widget>[

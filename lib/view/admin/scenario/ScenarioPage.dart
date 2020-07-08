@@ -6,9 +6,10 @@ import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/enums/ViewState.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
 import 'package:journeywest/view/admin/scenario/ScenarioDetailPage.dart';
+import 'package:journeywest/view/admin/scenario/ScenarioEditPage.dart';
+import 'package:journeywest/view/admin/scenario/ScenarioForm.dart';
 import 'package:journeywest/viewmodel/admin/scenario/ScenarioViewModel.dart';
-import 'ScenarioEditPage.dart';
-import 'ScenarioForm.dart';
+
 import 'package:journeywest/view/admin/ShoppingCartPage.dart';
 
 

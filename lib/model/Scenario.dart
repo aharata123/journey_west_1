@@ -1,5 +1,5 @@
 class Scenario {
-  String name, description, location;
+  String name, description, location, fileURL;
   int timeRecord, id;
   DateTime startDate, endDate;
 
@@ -10,7 +10,8 @@ class Scenario {
     this.location,
     this.timeRecord,
     this.startDate,
-    this.endDate
+    this.endDate,
+    this.fileURL,
 });
 
   factory Scenario.fromJson(Map<String, dynamic> json) {
@@ -21,7 +22,8 @@ class Scenario {
       location: json['Location'],
       startDate: DateTime.parse(json['StartDate']),
       endDate: DateTime.parse(json['EndDate']),
-      timeRecord: json['TimeRecord']
+      timeRecord: json['TimeRecord'],
+      fileURL: json['FileURL']
     );
   }
 
@@ -32,7 +34,8 @@ class Scenario {
         "Location": location,
         "StartDate": startDate.toIso8601String(),
         "EndDate": endDate.toIso8601String(),
-        "TimeRecord": timeRecord.toString()
+        "TimeRecord": timeRecord.toString(),
+        "FileURL": fileURL,
       };
 
 }
