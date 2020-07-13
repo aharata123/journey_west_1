@@ -5,12 +5,14 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/enums/ViewState.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
+
+
+import 'package:journeywest/view/admin/ShoppingCartPage.dart';
+import 'package:journeywest/view/admin/scenario/ListActorsPage.dart';
 import 'package:journeywest/view/admin/scenario/ScenarioDetailPage.dart';
 import 'package:journeywest/view/admin/scenario/ScenarioEditPage.dart';
 import 'package:journeywest/view/admin/scenario/ScenarioForm.dart';
 import 'package:journeywest/viewmodel/admin/scenario/ScenarioViewModel.dart';
-
-import 'package:journeywest/view/admin/ShoppingCartPage.dart';
 
 
 class ScenarioPage extends StatelessWidget {
@@ -123,13 +125,24 @@ class ScenarioPage extends StatelessWidget {
                                         onPressed: Navigator.of(context).pop,
                                       ),
                                       popup.button(
-                                        label: 'Shopping Cart',
-                                        onPressed: () {
-                                          Navigator.push(context, MaterialPageRoute(
-                                              builder: (context) => ShoppingCartPage(id: model.listForSearch[index].id, name: model.listForSearch[index].name)
-                                          ));
-                                        }
+                                          label: 'List Actors',
+                                          onPressed: () async {
+
+                                            final updated = await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(builder: (context) => ListActorsPage(id: model.listForSearch[index].id)),
+                                            );
+                                          }
                                       )
+
+//                                      popup.button(
+//                                        label: 'Shopping Cart',
+//                                        onPressed: () {
+//                                          Navigator.push(context, MaterialPageRoute(
+//                                              builder: (context) => ShoppingCartPage(id: model.listForSearch[index].id, name: model.listForSearch[index].name)
+//                                          ));
+//                                        }
+//                                      )
                                     ],
                                     // bool barrierDismissible = false,
                                     // Widget close,

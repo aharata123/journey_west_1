@@ -1,23 +1,22 @@
 
 
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:journeywest/model/Scenario.dart';
+import 'package:journeywest/model/Actor.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
-import 'package:journeywest/viewmodel/admin/scenario/ScenarioDetailViewModel.dart';
+import 'package:journeywest/viewmodel/admin/actor/ActorDetailViewModel.dart';
 
-
-class ScenarioDetailPage extends StatelessWidget {
-  final Scenario scenario;
-  ScenarioDetailPage({Key key, @required this.scenario}) : super(key : key);
+class ActorDetailPage extends StatelessWidget {
+  final Actor actor;
+  ActorDetailPage({Key key, @required this.actor}) : super(key : key);
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<ScenarioDetailViewModel>(
+    return BaseView<ActorDetailViewModel>(
       builder: (context, child, model) {
         return Scaffold(
           body: FutureBuilder(
-            future: model.fetchData(scenario),
+            future: model.fetchData(actor),
             builder: (context, snapshot) {
               if(snapshot.connectionState == ConnectionState.done) {
                 return SingleChildScrollView(
@@ -28,9 +27,19 @@ class ScenarioDetailPage extends StatelessWidget {
                         children: <Widget>[
                           Row(
                             children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  child: Image.network(model.actor.image)
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 15),
+                          Row(
+                            children: <Widget>[
                               Container(
                                 child: Icon(
-                                    Icons.image
+                                    Icons.person
                                 ),
                               ),
                               Expanded(
@@ -48,7 +57,7 @@ class ScenarioDetailPage extends StatelessWidget {
                                 flex: 3,
                                 child: Container(
                                   child: Text(
-                                      model.scenario.name
+                                      model.actor.name
                                   ),
                                 ),
                               )
@@ -59,14 +68,14 @@ class ScenarioDetailPage extends StatelessWidget {
                             children: <Widget>[
                               Container(
                                 child: Icon(
-                                    Icons.location_on
+                                    Icons.verified_user
                                 ),
                               ),
                               Expanded(
                                 flex: 2,
                                 child: Container(
                                   child: Text(
-                                    'Location',
+                                    'Username',
                                     style: TextStyle(
                                       color: Colors.blue,
                                     ),
@@ -77,7 +86,36 @@ class ScenarioDetailPage extends StatelessWidget {
                                 flex: 3,
                                 child: Container(
                                   child: Text(
-                                      model.scenario.location
+                                      model.actor.username
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 15),
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                child: Icon(
+                                    Icons.email
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  child: Text(
+                                    'Email',
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Container(
+                                  child: Text(
+                                      model.actor.email
                                   ),
                                 ),
                               )
@@ -106,7 +144,7 @@ class ScenarioDetailPage extends StatelessWidget {
                                 flex: 3,
                                 child: Container(
                                   child: Text(
-                                      model.scenario.description
+                                      model.actor.description
                                   ),
                                 ),
                               )
@@ -117,14 +155,14 @@ class ScenarioDetailPage extends StatelessWidget {
                             children: <Widget>[
                               Container(
                                 child: Icon(
-                                    Icons.date_range
+                                    Icons.phone
                                 ),
                               ),
                               Expanded(
                                 flex: 2,
                                 child: Container(
                                   child: Text(
-                                    'Start',
+                                    'Phone',
                                     style: TextStyle(
                                       color: Colors.blue,
                                     ),
@@ -135,94 +173,7 @@ class ScenarioDetailPage extends StatelessWidget {
                                 flex: 3,
                                 child: Container(
                                   child: Text(
-                                      DateFormat('dd-MM-yyyy hh:mm:ss').format(model.scenario.startDate)
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 15),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                child: Icon(
-                                    Icons.date_range
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Text(
-                                    'End',
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  child: Text(
-                                      DateFormat('dd-MM-yyyy hh:mm:ss').format(model.scenario.endDate)
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 15),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                child: Icon(
-                                    Icons.timer
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Text(
-                                    'Time Record',
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  child: Text(
-                                      model.scenario.timeRecord.toString()
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 15),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                child: Icon(
-                                    Icons.attach_file
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Text(
-                                    'File name ',
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  child: Text(
-                                      model.fileName
+                                      model.actor.phone
                                   ),
                                 ),
                               )

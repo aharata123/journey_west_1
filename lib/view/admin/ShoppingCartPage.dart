@@ -1,4 +1,5 @@
 import 'package:card_settings/card_settings.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:journeywest/viewmodel/ShoppingCartViewModel.dart';
@@ -31,9 +32,83 @@ class ShoppingCartPage extends StatelessWidget {
                         CardSettingsSection(
                           header: CardSettingsHeader(
                             color: Colors.blue,
-                            label: 'Scenario',
+                            label: 'Role',
                           ),
                           children: <Widget>[
+                            ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: model.roles.length,
+                              itemBuilder: (context, index) {
+                                return Dismissible(
+                                  key: Key(index.toString()),
+                                  child: Container(
+                                    child: Column(
+                                      children: [
+                                        CardSettingsText(
+                                          label: "Role",
+                                          initialValue: "",
+                                          hintText: "Name of Role",
+                                          onChanged: (value) {
+                                            model.roles[index].roleName = value;
+                                          },
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) return 'Name is required.';
+                                          },
+                                        ),
+                                        CardSettingsListPicker(
+                                          options: model.nameActor,
+                                          values: model.idActor,
+                                          label: "Actor",
+                                          onChanged: (value) {
+                                            model.roles[index].idActor = int.parse(value);
+                                          },
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) return 'Actor is required.';
+                                          },
+                                        ),
+                                        SizedBox(height: 20),
+                                    
+                                      ],
+                                    ),
+                                  ),
+                                  onDismissed: (direction) {
+                                    model.deleteRole(index);
+                                  },
+                                );
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CardFieldLayout(<Widget>[
+                                CardSettingsButton(
+                                  label: 'Save',
+                                  backgroundColor: Colors.green,
+                                  onPressed: () async {
+                                    if(_formKey.currentState.validate()) {
+                                      model.addRoleToScenario(id);
+//                                      bool isUpdated = await model.update();
+//                                      if(isUpdated) {
+//                                        Navigator.pop(context, Status.isUpdated);
+//                                      } else {
+//                                        final popup = BeautifulPopup(
+//                                          context: context,
+//                                          template: TemplateFail,
+//                                        );
+//                                        popup.show(
+//                                            title: 'Action failed',
+//                                            content: 'Something went wrong.',
+//                                            actions: [
+//                                              popup.button(
+//                                                label: 'Close',
+//                                                onPressed: Navigator.of(context).pop,
+//                                              )]);
+//                                      }
+                                    }
+                                  },
+                                ),
+                              ]),
+                            ),
                           ],
                         ),
                       ],
@@ -71,7 +146,7 @@ class ShoppingCartPage extends StatelessWidget {
                     backgroundColor: Colors.blue,
                     label: 'Add Role',
                     labelStyle: TextStyle(fontSize: 18.0),
-                    onTap: () => print('FIRST CHILD')
+                    onTap: () => model.addRole()
                 ),
                 SpeedDialChild(
                   child: Icon(Icons.brush),

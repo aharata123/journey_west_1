@@ -1,23 +1,22 @@
 
 
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:journeywest/model/Scenario.dart';
+import 'package:journeywest/model/Tool.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
-import 'package:journeywest/viewmodel/admin/scenario/ScenarioDetailViewModel.dart';
+import 'package:journeywest/viewmodel/admin/tool/ToolDetailViewModel.dart';
 
-
-class ScenarioDetailPage extends StatelessWidget {
-  final Scenario scenario;
-  ScenarioDetailPage({Key key, @required this.scenario}) : super(key : key);
+class ToolDetailPage extends StatelessWidget {
+  final Tool tool;
+  ToolDetailPage({Key key, @required this.tool}) : super(key : key);
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<ScenarioDetailViewModel>(
+    return BaseView<ToolDetailViewModel>(
       builder: (context, child, model) {
         return Scaffold(
           body: FutureBuilder(
-            future: model.fetchData(scenario),
+            future: model.fetchData(tool),
             builder: (context, snapshot) {
               if(snapshot.connectionState == ConnectionState.done) {
                 return SingleChildScrollView(
@@ -28,9 +27,19 @@ class ScenarioDetailPage extends StatelessWidget {
                         children: <Widget>[
                           Row(
                             children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                    child: Image.network(model.tool.image)
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 15),
+                          Row(
+                            children: <Widget>[
                               Container(
                                 child: Icon(
-                                    Icons.image
+                                    Icons.message
                                 ),
                               ),
                               Expanded(
@@ -48,36 +57,7 @@ class ScenarioDetailPage extends StatelessWidget {
                                 flex: 3,
                                 child: Container(
                                   child: Text(
-                                      model.scenario.name
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 15),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                child: Icon(
-                                    Icons.location_on
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Text(
-                                    'Location',
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  child: Text(
-                                      model.scenario.location
+                                      model.tool.name
                                   ),
                                 ),
                               )
@@ -106,7 +86,36 @@ class ScenarioDetailPage extends StatelessWidget {
                                 flex: 3,
                                 child: Container(
                                   child: Text(
-                                      model.scenario.description
+                                      model.tool.description
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 15),
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                child: Icon(
+                                    Icons.attach_money
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  child: Text(
+                                    'Quantity',
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Container(
+                                  child: Text(
+                                      model.tool.quantity.toString()
                                   ),
                                 ),
                               )
@@ -124,7 +133,7 @@ class ScenarioDetailPage extends StatelessWidget {
                                 flex: 2,
                                 child: Container(
                                   child: Text(
-                                    'Start',
+                                    'Date Created',
                                     style: TextStyle(
                                       color: Colors.blue,
                                     ),
@@ -135,94 +144,7 @@ class ScenarioDetailPage extends StatelessWidget {
                                 flex: 3,
                                 child: Container(
                                   child: Text(
-                                      DateFormat('dd-MM-yyyy hh:mm:ss').format(model.scenario.startDate)
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 15),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                child: Icon(
-                                    Icons.date_range
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Text(
-                                    'End',
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  child: Text(
-                                      DateFormat('dd-MM-yyyy hh:mm:ss').format(model.scenario.endDate)
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 15),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                child: Icon(
-                                    Icons.timer
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Text(
-                                    'Time Record',
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  child: Text(
-                                      model.scenario.timeRecord.toString()
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 15),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                child: Icon(
-                                    Icons.attach_file
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Text(
-                                    'File name ',
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  child: Text(
-                                      model.fileName
+                                      model.tool.dateCreated.toIso8601String()
                                   ),
                                 ),
                               )

@@ -7,6 +7,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/enums/ViewState.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
+import 'package:journeywest/view/admin/actor/ActorDetailPage.dart';
 import 'package:journeywest/view/admin/actor/ActorEditPage.dart';
 import 'package:journeywest/view/admin/actor/ActorForm.dart';
 import 'package:journeywest/viewmodel/admin/actor/ActorViewModel.dart';
@@ -114,18 +115,18 @@ class ActorPage extends StatelessWidget {
                                     context: context,
                                     template: TemplateBlueRocket,
                                   );
-//                                  popup.show(
-//                                    title: 'Scenario Info',
-//                                    content: ScenarioDetailPage(scenario: model.listForSearch[index]),
-//                                    actions: [
-//                                      popup.button(
-//                                        label: 'Close',
-//                                        onPressed: Navigator.of(context).pop,
-//                                      ),
-//                                    ],
-//                                    // bool barrierDismissible = false,
-//                                    // Widget close,
-//                                  );
+                                  popup.show(
+                                    title: 'Scenario Info',
+                                    content: ActorDetailPage(actor: model.listForSearch[index]),
+                                    actions: [
+                                      popup.button(
+                                        label: 'Close',
+                                        onPressed: Navigator.of(context).pop,
+                                      ),
+                                    ],
+                                    // bool barrierDismissible = false,
+                                    // Widget close,
+                                  );
                                 },
                               ),
                             );
