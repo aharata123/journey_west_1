@@ -1,8 +1,8 @@
 import 'dart:io';
-
+import 'dart:convert';
 import 'package:file_utils/file_utils.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:journeywest/enums/ViewState.dart';
 import 'package:journeywest/model/Actor.dart';
@@ -10,6 +10,7 @@ import 'package:journeywest/service/ActorService.dart';
 
 import 'package:journeywest/service_locator.dart';
 import 'package:journeywest/viewmodel/BaseModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ActorEditViewModel extends BaseModel {
   ActorService actorService = locator<ActorService>();
@@ -33,6 +34,7 @@ class ActorEditViewModel extends BaseModel {
       }
       this.actor.image = await uploadToFireStore();
     }
+
     return actorService.updateActor(actor);
   }
 

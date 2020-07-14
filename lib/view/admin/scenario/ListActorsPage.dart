@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/enums/ViewState.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
 import 'package:journeywest/view/admin/ShoppingCartPage.dart';
@@ -73,12 +74,12 @@ class ListActorsPage extends StatelessWidget {
                                                    CupertinoDialogAction(
                                                      child: Text('Yes'),
                                                      onPressed: () async {
-//                                                print(model.listForSearch[index].id);
-//                                                bool isDelete = await model.deleteScenario(model.listForSearch[index].id);
-//                                                Navigator.pop(context);
-//                                                if(isDelete) {
-//                                                  model.loadScenario();
-//                                                }
+                                                bool isDelete = await   model.deleteRoles(model.rolesInScenario[index].idScenario, model.rolesInScenario[index].roleName, model.rolesInScenario[index].idActor);
+                                                Navigator.pop(context);
+                                                if(isDelete) {
+                                                  model.loadRolesInScenario(id);
+                                                  model.refresh();
+                                                }
                                                      },
                                                    )
                                                  ],
@@ -123,9 +124,10 @@ class ListActorsPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (context) => ShoppingCartPage(id: id)),
                   );
-//                  if(created == Status.isCreated) {
-//                    model.loadScenario();
-//                  }
+                  if(created == Status.isCreated) {
+                    model.loadRolesInScenario(id);
+                    model.refresh();
+                  }
                 },
                 label: Text('Add Actor'),
                 icon: Icon(Icons.add),

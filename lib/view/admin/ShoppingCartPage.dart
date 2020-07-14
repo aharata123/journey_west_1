@@ -1,7 +1,9 @@
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:journeywest/enums/Status.dart';
 import 'package:journeywest/viewmodel/ShoppingCartViewModel.dart';
 
 import 'BaseView.dart';
@@ -40,41 +42,36 @@ class ShoppingCartPage extends StatelessWidget {
                               shrinkWrap: true,
                               itemCount: model.roles.length,
                               itemBuilder: (context, index) {
-                                return Dismissible(
-                                  key: Key(index.toString()),
-                                  child: Container(
-                                    child: Column(
-                                      children: [
-                                        CardSettingsText(
-                                          label: "Role",
-                                          initialValue: "",
-                                          hintText: "Name of Role",
-                                          onChanged: (value) {
-                                            model.roles[index].roleName = value;
-                                          },
-                                          validator: (value) {
-                                            if (value == null || value.isEmpty) return 'Name is required.';
-                                          },
-                                        ),
-                                        CardSettingsListPicker(
-                                          options: model.nameActor,
-                                          values: model.idActor,
-                                          label: "Actor",
-                                          onChanged: (value) {
-                                            model.roles[index].idActor = int.parse(value);
-                                          },
-                                          validator: (value) {
-                                            if (value == null || value.isEmpty) return 'Actor is required.';
-                                          },
-                                        ),
-                                        SizedBox(height: 20),
-                                    
-                                      ],
-                                    ),
+                                return Container(
+                                  child: Column(
+                                    children: [
+                                      CardSettingsText(
+                                        label: "Role",
+                                        initialValue: "",
+                                        hintText: "Name of Role",
+                                        onChanged: (value) {
+                                          model.roles[index].roleName = value;
+                                        },
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) return 'Name is required.';
+                                        },
+                                      ),
+                                      CardSettingsListPicker(
+                                        options: model.nameActor,
+                                        values: model.idActor,
+                                        label: "Actor",
+                                        onChanged: (value) {
+                                          model.roles[index].idActor = int.parse(value);
+                                        },
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) return 'Actor is required.';
+                                        },
+                                      ),
+
+                                      SizedBox(height: 20),
+
+                                    ],
                                   ),
-                                  onDismissed: (direction) {
-                                    model.deleteRole(index);
-                                  },
                                 );
                               },
                             ),
@@ -86,24 +83,24 @@ class ShoppingCartPage extends StatelessWidget {
                                   backgroundColor: Colors.green,
                                   onPressed: () async {
                                     if(_formKey.currentState.validate()) {
-                                      model.addRoleToScenario(id);
-//                                      bool isUpdated = await model.update();
-//                                      if(isUpdated) {
-//                                        Navigator.pop(context, Status.isUpdated);
-//                                      } else {
-//                                        final popup = BeautifulPopup(
-//                                          context: context,
-//                                          template: TemplateFail,
-//                                        );
-//                                        popup.show(
-//                                            title: 'Action failed',
-//                                            content: 'Something went wrong.',
-//                                            actions: [
-//                                              popup.button(
-//                                                label: 'Close',
-//                                                onPressed: Navigator.of(context).pop,
-//                                              )]);
-//                                      }
+
+                                      bool isCreated = await model.addRoleToScenario(id);
+                                      if(isCreated) {
+                                        Navigator.pop(context, Status.isCreated);
+                                      } else {
+                                        final popup = BeautifulPopup(
+                                          context: context,
+                                          template: TemplateFail,
+                                        );
+                                        popup.show(
+                                            title: 'Action failed',
+                                            content: 'Something went wrong.',
+                                            actions: [
+                                              popup.button(
+                                                label: 'Close',
+                                                onPressed: Navigator.of(context).pop,
+                                              )]);
+                                      }
                                     }
                                   },
                                 ),
@@ -142,18 +139,18 @@ class ShoppingCartPage extends StatelessWidget {
               shape: CircleBorder(),
               children: [
                 SpeedDialChild(
-                    child: Icon(Icons.accessibility),
+                    child: Icon(Icons.person),
                     backgroundColor: Colors.blue,
                     label: 'Add Role',
                     labelStyle: TextStyle(fontSize: 18.0),
                     onTap: () => model.addRole()
                 ),
                 SpeedDialChild(
-                  child: Icon(Icons.brush),
-                  backgroundColor: Colors.blue,
-                  label: 'Add Tool',
+                  child: Icon(Icons.person),
+                  backgroundColor: Colors.red,
+                  label: 'Remove Role',
                   labelStyle: TextStyle(fontSize: 18.0),
-                  onTap: () => print('SECOND CHILD'),
+                  onTap: () => model.deleteRole(model.roles.length-1),
                 ),
               ],
             ),

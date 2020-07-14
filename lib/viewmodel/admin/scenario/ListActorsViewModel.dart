@@ -19,4 +19,12 @@ class ListActorsViewModel extends BaseModel {
       return rolesInScenario;
     }
 
+    void refresh() {
+        notifyListeners();
+    }
+
+    Future<bool> deleteRoles(int idScenario, String roleName, int idActor) {
+        return shoppingCartService.deleteRoleInScene(idScenario, roleName, idActor);
+    }
+
 }

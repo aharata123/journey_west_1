@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:journeywest/model/Actor.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ActorService {
   var url = 'https://journeytothewestapi.azurewebsites.net/api/actor/';
@@ -19,10 +20,14 @@ class ActorService {
 
   Future<bool> createActor(Actor actor) async {
     var isCreated = false;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final user = json.decode(prefs.get("User"));
+    Map map = actor.toMap();
+    map['UpdatedBy'] = user['Name'];
 
     var response = await http.post(
         url,
-        body: actor.toMap()
+        body: map
     );
     print(response.statusCode);
     print(response.body);
@@ -35,9 +40,12 @@ class ActorService {
   Future<bool> updateActor(Actor actor) async {
     var isUpdated = false;
 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final user = json.decode(prefs.get("User"));
+
     Map<String, String> map = actor.toMap();
     map["IdActor"] = actor.id.toString();
-
+    map['UpdatedBy'] = user['Name'];
     var response = await http.put(
         url+actor.id.toString(),
         body: map

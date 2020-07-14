@@ -116,7 +116,7 @@ class ActorPage extends StatelessWidget {
                                     template: TemplateBlueRocket,
                                   );
                                   popup.show(
-                                    title: 'Scenario Info',
+                                    title: 'Actor Info',
                                     content: ActorDetailPage(actor: model.listForSearch[index]),
                                     actions: [
                                       popup.button(

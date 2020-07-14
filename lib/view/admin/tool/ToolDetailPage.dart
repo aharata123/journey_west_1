@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:journeywest/model/Tool.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
 import 'package:journeywest/viewmodel/admin/tool/ToolDetailViewModel.dart';
@@ -144,7 +145,7 @@ class ToolDetailPage extends StatelessWidget {
                                 flex: 3,
                                 child: Container(
                                   child: Text(
-                                      model.tool.dateCreated.toIso8601String()
+                                      DateFormat('dd-MM-yyyy hh:mm:ss').format(model.tool.dateCreated)
                                   ),
                                 ),
                               )

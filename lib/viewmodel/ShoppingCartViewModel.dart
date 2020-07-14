@@ -1,30 +1,36 @@
 
 import 'package:journeywest/model/Actor.dart';
-import 'package:journeywest/model/RoleInScenario.dart';
+import 'package:journeywest/model/RoleInScenarioForm.dart';
 import 'package:journeywest/service/ActorService.dart';
+import 'package:journeywest/service/ShoppingCartService.dart';
 import 'package:journeywest/service_locator.dart';
 import 'package:journeywest/viewmodel/BaseModel.dart';
 
 class ShoppingCartViewModel extends BaseModel {
-    List<RoleInScenario> roles = List<RoleInScenario>();
+    List<RoleInScenarioForm> roles = List<RoleInScenarioForm>();
 
     List<String> nameActor = List<String>();
     List<String> idActor = List<String>();
 
     ActorService actorService = locator<ActorService>();
 
+    ShoppingCartService shoppingCartService = locator<ShoppingCartService>();
+
     ShoppingCartViewModel() {
-      roles.add(RoleInScenario());
+      roles.add(RoleInScenarioForm());
       load();
     }
 
     void addRole() {
-      roles.add(RoleInScenario());
+      roles.add(RoleInScenarioForm());
       notifyListeners();
     }
 
     void deleteRole(int index) {
-        roles.removeAt(index);
+        if(roles.length != 1) {
+          roles.removeAt(index);
+          notifyListeners();
+        }
     }
 
     Future<void> load() async {
@@ -35,14 +41,11 @@ class ShoppingCartViewModel extends BaseModel {
       });
     }
 
-    void addRoleToScenario(int idScenario) {
+    Future<bool> addRoleToScenario(int idScenario) {
         roles.forEach((element) {
           element.idScenario = idScenario;
         });
-
-        roles.forEach((element) {
-          print(element.idScenario.toString() +"--"+ element.roleName +"--" + element.idActor.toString());
-        });
+       return shoppingCartService.createRoleInScenario(roles);
     }
 
 }

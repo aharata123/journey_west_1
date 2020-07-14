@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:journeywest/model/Actor.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
 import 'package:journeywest/viewmodel/admin/actor/ActorDetailViewModel.dart';
@@ -174,6 +175,64 @@ class ActorDetailPage extends StatelessWidget {
                                 child: Container(
                                   child: Text(
                                       model.actor.phone
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 15),
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                child: Icon(
+                                    Icons.date_range
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  child: Text(
+                                    'Date Updated',
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Container(
+                                  child: Text(
+                                      DateFormat('dd-MM-yyyy hh:mm:ss').format(model.actor.dateUpdated)
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 15),
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                child: Icon(
+                                    Icons.person
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  child: Text(
+                                    'Updated by',
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Container(
+                                  child: Text(
+                                      model.actor.updatedBy
                                   ),
                                 ),
                               )

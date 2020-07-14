@@ -22,16 +22,12 @@ class RoleInScenario {
     );
   }
 
-//  Map<String, String> toMap() =>
-//      {
-//        "Name": name,
-//        "Description": description,
-//        "PhoneNumber": phone.toString(),
-//        "Email": email,
-//        "Image": image,
-//        "username": username,
-//        "password": password,
-//      };
+  Map<String, dynamic> toMap() =>
+      {
+        "IdScenario": idScenario,
+        "RoleName": roleName,
+        "IdActor": idActor,
+      };
 
 
 }
