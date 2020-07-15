@@ -42,20 +42,20 @@ class ListActorsPage extends StatelessWidget {
                                    return Slidable(
                                      actionPane: SlidableBehindActionPane(),
                                      secondaryActions: <Widget>[
-                                       IconSlideAction(
-                                         caption: 'Edit',
-                                         color: Colors.blue,
-                                         icon: Icons.edit,
-                                         onTap: () async {
-//                                    final updated = await Navigator.push(
-//                                      context,
-//                                      MaterialPageRoute(builder: (context) => ScenarioEditPage(scenario: model.listForSearch[index])),
-//                                    );
-//                                    if(updated == Status.isUpdated) {
-//                                      model.loadScenario();
-//                                    }
-                                         },
-                                       ),
+//                                       IconSlideAction(
+//                                         caption: 'Edit',
+//                                         color: Colors.blue,
+//                                         icon: Icons.edit,
+//                                         onTap: () async {
+////                                    final updated = await Navigator.push(
+////                                      context,
+////                                      MaterialPageRoute(builder: (context) => ScenarioEditPage(scenario: model.listForSearch[index])),
+////                                    );
+////                                    if(updated == Status.isUpdated) {
+////                                      model.loadScenario();
+////                                    }
+//                                         },
+//                                       ),
                                        IconSlideAction(
                                          caption: 'Delete',
                                          color: Colors.red,

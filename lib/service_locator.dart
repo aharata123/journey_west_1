@@ -3,7 +3,6 @@ import 'package:journeywest/service/ActorService.dart';
 import 'package:journeywest/service/ScenarioService.dart';
 import 'package:journeywest/service/ShoppingCartService.dart';
 import 'package:journeywest/service/ToolService.dart';
-import 'package:journeywest/view/admin/actor/ActorDetailPage.dart';
 import 'package:journeywest/viewmodel/LoginViewModel.dart';
 import 'package:journeywest/viewmodel/ShoppingCartViewModel.dart';
 import 'package:journeywest/viewmodel/admin/actor/ActorDetailViewModel.dart';
@@ -11,10 +10,12 @@ import 'package:journeywest/viewmodel/admin/actor/ActorEditViewModel.dart';
 import 'package:journeywest/viewmodel/admin/actor/ActorFormViewModel.dart';
 import 'package:journeywest/viewmodel/admin/actor/ActorViewModel.dart';
 import 'package:journeywest/viewmodel/admin/scenario/ListActorsViewModel.dart';
+import 'package:journeywest/viewmodel/admin/scenario/ListToolsViewModel.dart';
 import 'package:journeywest/viewmodel/admin/scenario/ScenarioDetailViewModel.dart';
 import 'package:journeywest/viewmodel/admin/scenario/ScenarioEditViewModel.dart';
 import 'package:journeywest/viewmodel/admin/scenario/ScenarioFormViewModel.dart';
 import 'package:journeywest/viewmodel/admin/scenario/ScenarioViewModel.dart';
+import 'package:journeywest/viewmodel/admin/scenario/ShoppingCartForToolViewModel.dart';
 import 'package:journeywest/viewmodel/admin/tool/ToolDetailViewModel.dart';
 import 'package:journeywest/viewmodel/admin/tool/ToolEditViewModel.dart';
 import 'package:journeywest/viewmodel/admin/tool/ToolFormViewModel.dart';
@@ -37,6 +38,7 @@ void setupLocator() {
 
   locator.registerFactory<LoginViewModel>(() => LoginViewModel());
   locator.registerFactory<ShoppingCartViewModel>(() => ShoppingCartViewModel());
+  locator.registerFactory<ShoppingCartForToolViewModel>(() => ShoppingCartForToolViewModel());
 
   locator.registerFactory<ActorViewModel>(() => ActorViewModel());
   locator.registerFactory<ActorFormViewModel>(() => ActorFormViewModel());
@@ -49,4 +51,5 @@ void setupLocator() {
   locator.registerFactory<ToolDetailViewModel>(() => ToolDetailViewModel());
 
   locator.registerFactory<ListActorsViewModel>(() => ListActorsViewModel());
+  locator.registerFactory<ListToolsViewModel>(() => ListToolsViewModel());
 }

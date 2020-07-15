@@ -9,6 +9,7 @@ import 'package:journeywest/view/admin/BaseView.dart';
 
 import 'package:journeywest/view/admin/ShoppingCartPage.dart';
 import 'package:journeywest/view/admin/scenario/ListActorsPage.dart';
+import 'package:journeywest/view/admin/scenario/ListToolsPage.dart';
 import 'package:journeywest/view/admin/scenario/ScenarioDetailPage.dart';
 import 'package:journeywest/view/admin/scenario/ScenarioEditPage.dart';
 import 'package:journeywest/view/admin/scenario/ScenarioForm.dart';
@@ -133,16 +134,15 @@ class ScenarioPage extends StatelessWidget {
                                               MaterialPageRoute(builder: (context) => ListActorsPage(id: model.listForSearch[index].id)),
                                             );
                                           }
+                                      ),
+                                      popup.button(
+                                        label: 'List Tools',
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(
+                                              builder: (context) => ListToolsPage(id: model.listForSearch[index].id)
+                                          ));
+                                        }
                                       )
-
-//                                      popup.button(
-//                                        label: 'Shopping Cart',
-//                                        onPressed: () {
-//                                          Navigator.push(context, MaterialPageRoute(
-//                                              builder: (context) => ShoppingCartPage(id: model.listForSearch[index].id, name: model.listForSearch[index].name)
-//                                          ));
-//                                        }
-//                                      )
                                     ],
                                     // bool barrierDismissible = false,
                                     // Widget close,

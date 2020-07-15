@@ -60,7 +60,7 @@ class LoginPage extends StatelessWidget {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.person,
                 color: Colors.white,
               ),
               hintText: 'Enter your username',

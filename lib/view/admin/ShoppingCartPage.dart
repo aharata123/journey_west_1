@@ -24,7 +24,8 @@ class ShoppingCartPage extends StatelessWidget {
               centerTitle: true,
               title: Text('Shopping Cart'),
             ),
-            body: Column(
+            body:
+            Column(
               children: <Widget>[
                 Flexible(
                   child: Form(
