@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_utils/file_utils.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:journeywest/model/Scenario.dart';
 import 'package:journeywest/service/ScenarioService.dart';
 import 'package:journeywest/service_locator.dart';
@@ -50,7 +51,9 @@ class ScenarioEditViewModel extends BaseModel {
   }
 
   Future<String> uploadToFireStore() async {
-    String filename= FileUtils.basename(file.path);
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('dd-MM-yyyy–HH-mm-ss').format(now);
+    String filename= formattedDate+"-"+FileUtils.basename(file.path);
     StorageReference ref = FirebaseStorage.instance.ref().child(filename);
     StorageUploadTask uploadTask = ref.putFile(file);
     var url = await (await uploadTask.onComplete).ref.getDownloadURL();

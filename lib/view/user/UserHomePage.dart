@@ -1,23 +1,28 @@
 
 
+
+
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:journeywest/view/admin/actor/ActorPage.dart';
-import 'package:journeywest/view/admin/scenario/ScenarioPage.dart';
-import 'package:journeywest/view/admin/tool/ToolPage.dart';
+import 'package:journeywest/enums/Status.dart';
+import 'package:journeywest/model/Actor.dart';
+import 'package:journeywest/view/admin/actor/ActorEditPage.dart';
 import 'package:journeywest/view/login.dart';
+import 'package:journeywest/view/user/UserHistoryPage.dart';
+import 'package:journeywest/view/user/UserSchedulePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeAdmin extends StatefulWidget {
+class UserHomePage extends StatefulWidget {
   @override
-  _HomeAdminState createState() => _HomeAdminState();
+  _UserHomePage createState() => _UserHomePage();
 }
 
-class _HomeAdminState extends State<HomeAdmin> {
-   var user;
+class _UserHomePage extends State<UserHomePage> {
+  var user;
 
-   void initState() {
-     fetch();
+  void initState() {
+    fetch();
     super.initState();
 
   }
@@ -31,10 +36,10 @@ class _HomeAdminState extends State<HomeAdmin> {
 
   int _currentIndex = 0;
   final tabs = [
-//    Center(child: Text('Home')),
-    Center(child: ScenarioPage()),
-    Center(child: ActorPage()),
-    Center(child: ToolPage()),
+    Center(child: UserHistoryPage()),
+    Center(child: UserSchedulePage()),
+//    Center(child: ActorPage()),
+//    Center(child: ToolPage()),
   ];
 
   @override
@@ -55,14 +60,23 @@ class _HomeAdminState extends State<HomeAdmin> {
                   ),
                 ),
               ),
-        ),
+            ),
 //            ListTile(
-//              title: Text('Item 1'),
-//              onTap: () {
-//                // Update the state of the app
-//                // ...
-//                // Then close the drawer
-//                Navigator.pop(context);
+//              leading: Icon(Icons.edit),
+//              title: Text('Edit Profile'),
+//              onTap: () async {
+//                Actor actor = Actor(username: user['username'], password: user['password'],
+//                name: user['Name'], description: user['Description'], email: user['Email'],
+//                id: user['IdActor'], image: user['Image'], phone: user['PhoneNumber'], updatedBy: user['UpdatedBy'],
+//                dateUpdated: DateTime.parse(user['DateUpdated']));
+//
+//                final updated = await Navigator.push(
+//                  context,
+//                  MaterialPageRoute(builder: (context) => ActorEditPage(actor: actor)),
+//                );
+//                if(updated == Status.isUpdated) {
+//
+//                }
 //              },
 //            ),
             ListTile(
@@ -93,26 +107,21 @@ class _HomeAdminState extends State<HomeAdmin> {
 //            backgroundColor: Colors.blue
 //          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.broken_image),
-              title: Text('Scenario'),
+              icon: Icon(Icons.history),
+              title: Text('History'),
               backgroundColor: Colors.blue
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Actor'),
-              backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.airport_shuttle),
-              title: Text('Tool'),
-              backgroundColor: Colors.blue
+            icon: Icon(Icons.schedule),
+            title: Text('Schedule'),
+            backgroundColor: Colors.blue,
           ),
         ],
-      onTap: (index) {
+        onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
-      } ,
+        } ,
       ),
     );
   }

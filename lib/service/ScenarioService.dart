@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:journeywest/model/Scenario.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ScenarioService {
   var url = 'https://journeytothewestapi.azurewebsites.net/api/scenario/';
@@ -60,5 +61,40 @@ class ScenarioService {
       isDeleted = true;
     }
     return isDeleted;
+  }
+
+  Future<List<Scenario>> loadHistory() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var user = json.decode(prefs.get("User"));
+
+    var response = await http.get(url+"history/"+user['IdActor'].toString());
+    List<Scenario> list = new List<Scenario>();
+    if(response.statusCode == 200) {
+      final parsed = json.decode(response.body);
+      list = parsed.map<Scenario>((json) => Scenario.fromJson(json)).toList();
+    }
+    return list;
+  }
+
+  Future<List<Scenario>> loadSchedule() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var user = json.decode(prefs.get("User"));
+
+    var response = await http.get(url+"schedule/"+user['IdActor'].toString());
+    List<Scenario> list = new List<Scenario>();
+    if(response.statusCode == 200) {
+      final parsed = json.decode(response.body);
+      list = parsed.map<Scenario>((json) => Scenario.fromJson(json)).toList();
+    }
+    return list;
+  }
+
+  Future<String> readFromURL(String url) async {
+    final http.Response downloadData = await http.get(url);
+    if(downloadData.statusCode == 200) {
+        return downloadData.body;
+    } else {
+        return "";
+    }
   }
 }

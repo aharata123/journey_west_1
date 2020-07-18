@@ -20,6 +20,8 @@ import 'package:journeywest/viewmodel/admin/tool/ToolDetailViewModel.dart';
 import 'package:journeywest/viewmodel/admin/tool/ToolEditViewModel.dart';
 import 'package:journeywest/viewmodel/admin/tool/ToolFormViewModel.dart';
 import 'package:journeywest/viewmodel/admin/tool/ToolViewModel.dart';
+import 'package:journeywest/viewmodel/user/UserHistoryViewModel.dart';
+import 'package:journeywest/viewmodel/user/UserScheduleViewModel.dart';
 
 GetIt locator = GetIt();
 
@@ -52,4 +54,7 @@ void setupLocator() {
 
   locator.registerFactory<ListActorsViewModel>(() => ListActorsViewModel());
   locator.registerFactory<ListToolsViewModel>(() => ListToolsViewModel());
+
+  locator.registerFactory<UserHistoryViewModel>(() => UserHistoryViewModel());
+  locator.registerFactory<UserScheduleViewModel>(() => UserScheduleViewModel());
 }

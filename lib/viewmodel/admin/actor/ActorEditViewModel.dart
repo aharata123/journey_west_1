@@ -10,7 +10,6 @@ import 'package:journeywest/service/ActorService.dart';
 
 import 'package:journeywest/service_locator.dart';
 import 'package:journeywest/viewmodel/BaseModel.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ActorEditViewModel extends BaseModel {
   ActorService actorService = locator<ActorService>();

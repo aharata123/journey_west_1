@@ -9,6 +9,7 @@ import 'package:journeywest/enums/Role.dart';
 import 'package:journeywest/enums/ViewState.dart';
 import 'package:journeywest/view/admin/BaseView.dart';
 import 'package:journeywest/view/admin/HomePage.dart';
+import 'package:journeywest/view/user/UserHomePage.dart';
 import 'package:journeywest/viewmodel/LoginViewModel.dart';
 
 class LoginPage extends StatelessWidget {
@@ -154,7 +155,9 @@ class LoginPage extends StatelessWidget {
                   builder: (context) => HomeAdmin(),
                 ));
            } else if(role == Role.EMPLOYEE) {
-
+             Navigator.pushReplacement(context, MaterialPageRoute(
+               builder: (context) => UserHomePage(),
+             ));
            } else {
              final popup = BeautifulPopup(
                context: context,
